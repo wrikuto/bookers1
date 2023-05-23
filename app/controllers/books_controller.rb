@@ -16,7 +16,7 @@ class BooksController < ApplicationController
   def create
     @book = Book.new(book_params)
     if @book.save
-      redirect_to book_path(@book), notice: "succsessfully"
+      redirect_to book_path(@book), notice: "create succsessfully"
     else
       @books = Book.all
       @errors = @book.errors
@@ -40,8 +40,12 @@ class BooksController < ApplicationController
 
   def destroy
     @book = Book.find(params[:id])
-    @book.destroy
-    redirect_to books_path, notice: "deleted"
+    if @book.destroy
+      flash[:notice] = 'delete sucsessful'
+    else
+      flash[:alert] = 'Failed to delete the book.'
+    end
+    redirect_to books_path
   end
 
   private
