@@ -41,7 +41,7 @@ class BooksController < ApplicationController
   def destroy
     @book = Book.find(params[:id])
     if @book.destroy
-      flash[:notice] = 'delete sucsessful'
+      flash[:notice] = 'delete sucsessfully'
     else
       flash[:alert] = 'Failed to delete the book.'
     end
